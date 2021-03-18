@@ -2,9 +2,10 @@ import RPi.GPIO as GPIO
 import time
 
 GPIO.setmode(GPIO.BCM)
-pulPin = GPIO.setup(2, GPIO.OUT)
-dirPin = GPIO.setup(3, GPIO.OUT)
-enaPin = GPIO.setup(4, GPIO.OUT)
+enaPin = GPIO.setup(16, GPIO.OUT)
+dirPin = GPIO.setup(20, GPIO.OUT)
+pulPin = GPIO.setup(21, GPIO.OUT)
+
 
 PULSE_PER_REV = 200
 
