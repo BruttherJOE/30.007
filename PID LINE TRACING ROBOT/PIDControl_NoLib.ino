@@ -1,14 +1,12 @@
-//#include <QTRSensors.h>
-//QTRSensors qtr;
 const uint8_t SensorPins[] = {A1,A2,A3,A4};
 uint8_t SensorCount = 0;
-//uint16_t sensorValues[SensorCount];
 
 const uint16_t blackThreshold[] = {700, 700, 850, 700};
 const uint16_t sensorDist[] = {1, 9, 13, 21}; //1,8,16,23 original
 const uint16_t ldrThreshold = 400; //800 for touch
 
-float Kp = 10; //set up the constants value
+//constants in PID
+float Kp = 10; 
 float Ki = 0;
 float Kd = 16;
 float P;
@@ -16,17 +14,17 @@ float I;
 float D;
 
 int lastError = 0;
-boolean onoff = false;
+boolean onoff = false; //state of robot (true for permanently on and skip LDR phase)
 
-//Increasing the maxspeed can damage the motors - at a value of 255 the 6V motors will receive 7,4 V
+//Increasing the maxspeed can damage the motors - at a value of 255 the 6V motors will receive 7.4 V
+//comments are previous test params that worked, but the actual ones worked better
 const uint8_t basespeedA = 100; //left motor 100
 const uint8_t basespeedB = 100; //right 100
 const uint8_t maxspeedA = 160; //left motor 150
 const uint8_t maxspeedB = 160; //right 150
 const float dutycycle = 0.5;
 int cycletime = 50;
-
-//200 max 100 base
+//200 max 100 base was our initial test - too fast
 
 //Set up the drive motor carrier pins
 int ML_Dir = 4;
@@ -34,10 +32,6 @@ int ML_Speed = 5;
 int MR_Dir = 7;
 int MR_Speed = 6;
 int LDR = A0;
-
-//Set up the buttons pins
-//int buttoncalibrate = 17; //pin A3
-//int buttonstart = 2;
 
 void setup() {
   Serial.begin(9600);
@@ -55,13 +49,6 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 
   boolean Ok = false;
-  /*while (Ok == false) { //the loop won't start until the robot is calibrated
-    if(digitalRead(buttoncalibrate) == HIGH) {
-      calibration(); //calibrate the robot for 10 seconds
-      Ok = true;
-    }
-  }
-  */
   forward_brake(0, 0);
 }
 
@@ -91,7 +78,6 @@ void forward_brake(int motorspeedA, int motorspeedB) {
 }
 
 void PID_control() {
-  //uint16_t position = qtr.readLineBlack(sensorValues);
   float position = ReadSensors(blackThreshold);
   Serial.print(position);
   Serial.print("\n");
