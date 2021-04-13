@@ -11,6 +11,8 @@ GPIO.setup(dirPin, GPIO.OUT)
 GPIO.setup(pulPin, GPIO.OUT)
 
 PULSE_PER_REV = 200
+VOL_PER_STEP = 2.5
+EJECT_VOL = 1010
 
 def step(totalPulseTime): #in terms of seconds
     GPIO.output(pulPin,GPIO.HIGH)
@@ -40,6 +42,14 @@ def releaseStepper():
 
 def engageStepper():
     GPIO.output(enaPin,GPIO.LOW)
+
+def drawVolume(volume, sleepTime = 500):
+    rotatePulses((int)(volume/VOL_PER_STEP), True) 
+    time.sleep(sleepTime)
+    rototePulses((int)(volume/VOL_PER_STEP), False)
+
+def ejectVolume(volume = EJECT_VOL):
+    drawVolume(volume)
 
 
 
