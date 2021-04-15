@@ -16,7 +16,7 @@ def turn_off(sleep_time):
 	time.sleep(sleep_time)
 
 #### TEST ####
-while True:
+#while True:
 
-	turn_on(0.5)
-	turn_off(0.5)
+#	turn_on(0.5)
+#	turn_off(0.5)

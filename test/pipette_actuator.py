@@ -17,7 +17,7 @@ def press_pipette_button(vol): #vol is in terms of degrees stepped by stepper mo
     print('pressing on pipette button...')
     steppy.engageStepper()
     time.sleep(0.1)
-    steppy.rotate(c*vol,False,1)
+    steppy.rotate(c*vol,False,1,steppy.dir_pip,steppy.pul_pip)
     time.sleep(0.1)
     steppy.releaseStepper()
 
@@ -26,7 +26,7 @@ def depress_pipette_button(vol):
     print('depressing the pipette button...')
     steppy.engageStepper()
     time.sleep(0.1)
-    steppy.rotate(c*vol,True,1)
+    steppy.rotate(c*vol,True,1,steppy.dir_pip,steppy.pul_pip)
     time.sleep(0.1)
     steppy.releaseStepper()
 
