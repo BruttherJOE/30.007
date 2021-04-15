@@ -42,18 +42,38 @@ def home_x():
     time.sleep(0.1)
 
     while __name__ == "__main__":
-        steppy.rotate(1,True,1)
-        if GPIO.input(limit_switch_x) == True:
+        steppy.rotate(1,True,1,steppy.dir_x,steppy.pul_x)
+        if GPIO.input(limit_switch_x) == True:    #test if theres issues here : all lim_switches maybe pressed?
             x_pressed()
             break
         else:
             print("Not pressed")
 
 def home_y():
-    pass
+    
+    steppy.engageStepper()
+    time.sleep(0.1)
+
+    while __name__ == "__main__":
+        steppy.rotate(1,True,1,steppy.dir_y,steppy.pul_y)
+        if GPIO.input(limit_switch_y) == True:
+            y_pressed()
+            break
+        else:
+            print("Not pressed")
 
 def home_z():
-    pass
+    
+    steppy.engageStepper()
+    time.sleep(0.1)
+
+    while __name__ == "__main__":
+        steppy.rotate(1,True,1,steppy.dir_z,steppy.pul_z)
+        if GPIO.input(limit_switch_z) == True:
+            z_pressed()
+            break
+        else:
+            print("Not pressed")
 
 
 # MAIN
