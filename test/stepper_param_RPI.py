@@ -11,14 +11,14 @@ pul_pip = 21
 
 # AXIS PINS
 
-dir_x = 2
-pul_x = 3
+dir_x = 26
+pul_x = 19
 
-dir_y = 5
-pul_y = 6
+dir_y = 10
+pul_y = 22
 
-dir_z = 8
-pul_z = 9
+dir_z = 6
+pul_z = 11
 
 # GPIO CALLOUTS
 GPIO.setmode(GPIO.BCM)
