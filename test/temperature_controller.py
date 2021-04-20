@@ -3,8 +3,11 @@ import time
 import Relay_Param
 
 start_time = time.time()
-time_limiter = 10 # in terms of seconds
-temperature_threshold = 40 # relay turns off/on at this threshold
+time_limiter = 10            # in terms of seconds
+temperature_threshold = 40   # relay turns off/on at this threshold
+
+# SERIAL FUNCTIONS
+
 
 # MAIN SEQ
 while True:
